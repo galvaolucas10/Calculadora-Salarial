@@ -8,8 +8,7 @@ const valorPensao =
 document.getElementById("valorPensao")
 const campoPensao =
 document.getElementById("campo-pensao")
-const button =
-document.getElementById("button")
+/* RESULTADOS */
 const salarioBrutoResultado =
 document.getElementById("salarioBrutoResultado")
 const valorInss =
@@ -24,93 +23,146 @@ const valorIr =
 document.getElementById("valorIr")
 const salarioLiquido =
 document.getElementById("salarioLiquido")
-
-
+/* TROCAR TELAS */
+function abrirHome(){
+    document.getElementById("home")
+    .style.display = "flex"
+    document.getElementById("calculadora")
+    .style.display = "none"
+}
+function abrirCalculadora(){
+    document.getElementById("home").style.display = "none"
+    document.getElementById("calculadora").style.display = "flex"
+}
+/* PENSÃO */
 pensao.addEventListener("change", () => {
-
-    if(pensao.value === "sim"){
-campoPensao.style.display = "block"
+    if(pensao.value == "sim"){
+        campoPensao.style.display = "block"
     }else{
-campoPensao.style.display = "none"
+        campoPensao.style.display = "none"
     }
 })
-
-function abrirCalculadora(){
-
-    document.getElementById("calculadora").style.display = "block"
-    document.getElementById("home").style.display = "none"
-}
-
-function abrirHome(){
-
-    document.getElementById("calculadora").style.display = "none"
-    document.getElementById("home").style.display = "block"
-}
-
-button.addEventListener("click", calcular)
-
-function calcularINSS(salarioBruto){
-
+/* CALCULAR INSS */
+function calcularINSS(){
     let inss = 0
-
+    const salarioBruto =
+    Number(salario.value)
     if(salarioBruto <= 1621){
-inss =salarioBruto * 0.075
-    }else if(salarioBruto <= 2902.84){
-inss =((salarioBruto - 1621) * 0.09)+ 121.58
-     }else if(salarioBruto <= 4354.27){
-        inss =((salarioBruto - 2902.84) * 0.12) + 115.37 + 121.58
-    }else if(salarioBruto <= 8475.55){
-        inss =((salarioBruto - 4354.27) * 0.14) + 174.17 + 115.37 + 121.58
+        inss =
+        salarioBruto * 0.075
+    }else if(
+        salarioBruto > 1621
+        && salarioBruto <= 2902.84
+    ){
+        inss =
+        (salarioBruto - 1621)
+        * 0.09 + 121.58
+    }else if(
+        salarioBruto > 2902.84
+        && salarioBruto <= 4354.27
+    ){
+        inss =
+        (salarioBruto - 2902.84)
+        * 0.12 + 115.37 + 121.58
+    }else if(
+        salarioBruto > 4354.27
+        && salarioBruto <= 8475.55
+    ){
+        inss =
+        (salarioBruto - 4354.27)
+        * 0.14 + 115.37
+        + 121.58 + 174.17
     }else{
-inss = 988.10
-    }return inss
+        inss = 988.10
+    }
+  return inss
+} 
+/* CALCULAR IR */
+function calcularIr(base){
+    let ir = 0
+    if(base < 5000){
+        ir = 0
+    }else if(
+        base >= 5000
+        && base <= 7350
+    ){
+        let reducao =
+        978.62 - (0.13314 * base)
+        ir =
+        base * 0.275
+        - 908.73
+        - reducao
+    }else{
+        ir =
+        base * 0.275
+        - 908.73
+    }
+    return ir
 }
-function calcular(){
-    let salarioBruto =
+/* CALCULAR */
+document.getElementById("button")
+.addEventListener("click", calcular)
+
+    function calcular(){
+
+    let bruto =
     Number(salario.value)
     let inss =
-    calcularINSS(salarioBruto)
-    let descontoDependentes =
-    Number(dependentes.value) * 189.90
-    let valorPensaoFinal = 0
-    if(pensao.value === "sim"){
-        valorPensaoFinal = Number(valorPensao.value)}
-    let baseCalculo =
-    salarioBruto
-    - inss
-    - descontoDependentes
-    - valorPensaoFinal
-    let ir = 0
-    if(baseCalculo <= 2259.20){
-     ir = 0
-    }else if(baseCalculo <= 2826.65){
-        ir = (aseCalculo * 0.075)- 169.44
-    }else if(baseCalculo <= 3751.05){
-         ir= 
-        (baseCalculo * 0.15)
-        - 381.44
-    }else if(baseCalculo <= 4664.68){
-        ir =(baseCalculo * 0.225)- 662.77
-    }else{
-        ir = (baseCalculo * 0.275)- 896
+    calcularINSS()
+    let dep =
+    Number(dependentes.value)
+    * 189.90
+    let pensaoValor = 0
+    if(pensao.value == "sim"){
+        pensaoValor =
+        Number(valorPensao.value)
     }
+    let base =
+    bruto
+    - inss
+    - dep
+    - pensaoValor
+    let ir =
+    calcularIr(base)
     let liquido =
-    salarioBruto
+    bruto
     - inss
     - ir
-    - valorPensaoFinal
+    - pensaoValor
     salarioBrutoResultado.innerHTML =
-    `R$ ${salarioBruto.toFixed(2)}`
+    `R$ ${bruto.toFixed(2)}`
     valorInss.innerHTML =
     `R$ ${inss.toFixed(2)}`
     valorDependentes.innerHTML =
-    `R$ ${descontoDependentes.toFixed(2)}`
+    `R$ ${dep.toFixed(2)}`
     valorPensaoResultado.innerHTML =
-    `R$ ${valorPensaoFinal.toFixed(2)}`
+    `R$ ${pensaoValor.toFixed(2)}`
     baseIr.innerHTML =
-    `R$ ${baseCalculo.toFixed(2)}`
+    `R$ ${base.toFixed(2)}`
     valorIr.innerHTML =
     `R$ ${ir.toFixed(2)}`
     salarioLiquido.innerHTML =
     `R$ ${liquido.toFixed(2)}`
-}
+    }
+document.addEventListener("keydown", (e) => {
+    if(e.key === "Enter"){
+        calcular()
+    }
+    })
+const campos = document.querySelectorAll(
+"input, select"
+)
+campos.forEach((campo, index) => {
+    campo.addEventListener("keydown", (e) => {
+        if(e.key === "Enter"){
+            e.preventDefault()
+            let proximo =
+            campos[index + 1]
+            if(proximo){
+                proximo.focus()
+            }else{
+                calcular()
+            }
+        }
+    })
+})
