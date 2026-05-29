@@ -1,0 +1,281 @@
+*{
+
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+
+    background:linear-gradient(
+        135deg,
+        #0f172a,
+        #1e293b
+    );
+
+    min-height:100vh;
+}
+
+/* MENU */
+
+.menu{
+
+    position:fixed;
+
+    left:0;
+    top:0;
+
+    width:220px;
+
+    height:100vh;
+
+    background:#020617;
+
+    padding:20px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:15px;
+}
+
+.menu h2{
+
+    color:white;
+
+    margin-bottom:20px;
+}
+
+.menu button{
+
+    padding:14px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#2563eb;
+
+    color:white;
+
+    cursor:pointer;
+
+    font-weight:bold;
+}
+
+/* HOME */
+
+#home{
+
+    margin-left:240px;
+
+    padding:40px;
+}
+
+.home-card{
+
+    width:500px;
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    box-shadow:0px 0px 20px rgba(0,0,0,0.3);
+}
+
+.home-card h1{
+
+    margin-bottom:20px;
+}
+
+.home-card p{
+
+    margin-bottom:10px;
+}
+
+.home-card ul{
+
+    margin-left:20px;
+
+    margin-bottom:20px;
+}
+
+.home-card button{
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#2563eb;
+
+    color:white;
+
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+/* CALCULADORA */
+
+.container{
+
+    width:430px;
+
+    background:white;
+
+    padding:25px;
+
+    border-radius:20px;
+
+    box-shadow:0px 0px 25px rgba(0,0,0,0.3);
+
+    margin-left:260px;
+
+    margin-top:30px;
+
+    display:none;
+}
+
+.container h1{
+
+    text-align:center;
+
+    margin-bottom:25px;
+
+    color:#0f172a;
+}
+
+.card{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:15px;
+}
+
+label{
+
+    font-weight:bold;
+
+    color:#334155;
+}
+
+input,
+select{
+
+    width:100%;
+
+    padding:14px;
+
+    border-radius:12px;
+
+    border:2px solid #cbd5e1;
+
+    outline:none;
+
+    font-size:16px;
+}
+
+input:focus,
+select:focus{
+
+    border-color:#2563eb;
+}
+
+button{
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#2563eb;
+
+    color:white;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+button:hover{
+
+    background:#1d4ed8;
+}
+
+/* RESULTADO */
+
+.resultado{
+
+    margin-top:30px;
+}
+
+.resultado h2{
+
+    text-align:center;
+
+    margin-bottom:20px;
+}
+
+.resultado-item{
+
+    background:#f1f5f9;
+
+    padding:15px;
+
+    border-radius:12px;
+
+    margin-bottom:12px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+}
+
+.resultado-item div{
+
+    display:flex;
+
+    flex-direction:column;
+}
+
+.resultado-item span{
+
+    font-weight:bold;
+}
+
+.resultado-item small{
+
+    color:gray;
+
+    margin-top:4px;
+}
+
+.resultado-item p{
+
+    color:#2563eb;
+
+    font-weight:bold;
+
+    font-size:18px;
+}
+
+/* PENSÃO */
+
+#campo-pensao{
+
+    display:none;
+}
